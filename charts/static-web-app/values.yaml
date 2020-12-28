@@ -9,7 +9,7 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-gitCommitHash: ""
+ciRef: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
