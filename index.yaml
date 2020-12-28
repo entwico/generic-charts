@@ -1,6 +1,27 @@
 apiVersion: v1
 entries:
+  backend-app:
+  - apiVersion: v2
+    created: "2020-12-28T17:07:06.497055176Z"
+    description: Generic backend application deployment
+    digest: 704d8006cd4ca3d56b29b045d2f8cc70642824024c151f63dd5dbe30aa4161c5
+    icon: https://avatars3.githubusercontent.com/u/29914027?s=200&v=4
+    name: backend-app
+    type: application
+    urls:
+    - https://github.com/entwico/helm-charts/releases/download/backend-app-1.0.0/backend-app-1.0.0.tgz
+    version: 1.0.0
   static-web-app:
+  - apiVersion: v2
+    created: "2020-12-28T17:07:06.61290492Z"
+    description: Generic static web application deployment
+    digest: 9af2f431896ae90a7ab8621c9d97ab3c2ee7209f494b55b30c4e511ee1ae64eb
+    icon: https://avatars3.githubusercontent.com/u/29914027?s=200&v=4
+    name: static-web-app
+    type: application
+    urls:
+    - https://github.com/entwico/helm-charts/releases/download/static-web-app-1.0.1/static-web-app-1.0.1.tgz
+    version: 1.0.1
   - apiVersion: v2
     created: "2020-12-28T16:22:16.482571408Z"
     description: Generic static web application deployment
