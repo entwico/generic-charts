@@ -1,5 +1,5 @@
-apiVersion: v2
 name: static-web-app
+apiVersion: v2
 icon: https://avatars3.githubusercontent.com/u/29914027?s=200&v=4
 description: Generic static web application deployment
 type: application
