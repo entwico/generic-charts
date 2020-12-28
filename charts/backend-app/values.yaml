@@ -1,0 +1,64 @@
+replicaCount: 1
+
+image:
+  repository: nginx
+  tag: latest
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+ciRef: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name:
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      name: http
+
+ingress:
+  enabled: false
+  annotations: {}
+  hosts:
+    - host: chart-example.local
+      paths: []
+  tls: []
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+envFromSecretNames: []
+
+podAnnotations: {}
+
+# Configmap will be created and mounted as config file
+#configFile:
+#  server:
+#    baseUrl: http://app.example.com
+
+# Additional environment variables
+env:
+#  - name: APP_LOG_LEVEL
+#    value: debug
