@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   backend-app:
   - apiVersion: v2
+    created: "2020-12-29T11:10:58.818609922Z"
+    description: Generic backend application deployment
+    digest: 75c2aede0a706d0b33885535d36690b3d50a60961ec9d32c1eb437b1ddb0fdb9
+    icon: https://avatars3.githubusercontent.com/u/29914027?s=200&v=4
+    name: backend-app
+    type: application
+    urls:
+    - https://github.com/entwico/helm-charts/releases/download/backend-app-1.0.3/backend-app-1.0.3.tgz
+    version: 1.0.3
+  - apiVersion: v2
     created: "2020-12-29T10:45:33.941767226Z"
     description: Generic backend application deployment
     digest: dc2fdb1a8ab1fd4391226973f25c27967f9a9707ed562d8c954f3e90484f47a8
