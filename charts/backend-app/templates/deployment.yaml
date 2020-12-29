@@ -61,7 +61,7 @@ spec:
               port: http
           volumeMounts:
             {{- if .Values.mountFiles }}
-            - name: mountFiles
+            - name: mounted-files
               mountPath: {{ .Values.mountFiles.path }}
             {{- end }}
           resources:
@@ -80,7 +80,7 @@ spec:
     {{- end }}
       volumes:
         {{- if .Values.mountFiles }}
-        - name: mountFiles
+        - name: mounted-files
           configMap:
             name: {{ include "backend-app.fullname" . }}
         {{ end }}
