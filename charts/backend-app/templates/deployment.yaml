@@ -33,8 +33,8 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if .Values.config }}
-          args: ["backend-app", "--config", "/etc/backend-app/config.yaml"]
+          {{- if .Values.containerArgs }}
+          args: {{ .Values.containerArgs }}
           {{- end }}
           env:
             {{- toYaml .Values.env | nindent 12 }}
@@ -60,9 +60,9 @@ spec:
               path: /health
               port: http
           volumeMounts:
-            {{- if .Values.config }}
-            - name: config
-              mountPath: /etc/backend-app/
+            {{- if .Values.mountFiles }}
+            - name: mountFiles
+              mountPath: {{ .Values.mountFiles.path }}
             {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
@@ -79,8 +79,8 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       volumes:
-        {{- if .Values.configFile }}
-        - name: config
+        {{- if .Values.mountFiles }}
+        - name: mountFiles
           configMap:
             name: {{ include "backend-app.fullname" . }}
         {{ end }}

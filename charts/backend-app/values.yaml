@@ -16,6 +16,8 @@ serviceAccount:
   annotations: {}
   name:
 
+containerArgs: null
+
 podSecurityContext: {}
   # fsGroup: 2000
 
@@ -53,12 +55,15 @@ envFromSecretNames: []
 
 podAnnotations: {}
 
-# Configmap will be created and mounted as config file
-#configFile:
-#  server:
-#    baseUrl: http://app.example.com
+mountFiles:
+  path: /etc/app/
+  files:
+    config.yaml: |-
+      server:
+        baseUrl: 123
+    application.json: |-
+      { "version": 23 }
 
-# Additional environment variables
-env:
+env: []
 #  - name: APP_LOG_LEVEL
 #    value: debug
