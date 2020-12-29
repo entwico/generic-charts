@@ -1,0 +1,10 @@
+vaultSecrets: []
+# - name: secret-name
+#   dataFrom: 
+#     - path/to/secret
+
+vaultImagePullSecrets: []
+# - name: secret-name
+#   key: path/to/secret
+#   propertyName: propertyName
+# 
