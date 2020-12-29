@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   backend-app:
   - apiVersion: v2
+    created: "2020-12-29T10:38:38.039632406Z"
+    description: Generic backend application deployment
+    digest: a3475801d2731df862c46a44aa55bb5d7006cab992de70e76f6643e42593b795
+    icon: https://avatars3.githubusercontent.com/u/29914027?s=200&v=4
+    name: backend-app
+    type: application
+    urls:
+    - https://github.com/entwico/helm-charts/releases/download/backend-app-1.0.1/backend-app-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
     created: "2020-12-28T17:07:06.497055176Z"
     description: Generic backend application deployment
     digest: 704d8006cd4ca3d56b29b045d2f8cc70642824024c151f63dd5dbe30aa4161c5
@@ -10,6 +20,17 @@ entries:
     type: application
     urls:
     - https://github.com/entwico/helm-charts/releases/download/backend-app-1.0.0/backend-app-1.0.0.tgz
+    version: 1.0.0
+  external-secrets:
+  - apiVersion: v2
+    created: "2020-12-29T10:38:38.148287014Z"
+    description: External secrets
+    digest: dccaf54cbfa67db8df5432f91ce6a021131448323d5e1afa301a02a92ef43168
+    icon: https://avatars3.githubusercontent.com/u/29914027?s=200&v=4
+    name: external-secrets
+    type: application
+    urls:
+    - https://github.com/entwico/helm-charts/releases/download/external-secrets-1.0.0/external-secrets-1.0.0.tgz
     version: 1.0.0
   static-web-app:
   - apiVersion: v2
