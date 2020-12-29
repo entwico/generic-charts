@@ -1,4 +1,5 @@
-{{- if .Values.mountFiles2-}}
+{{- if .Values.mountFiles -}}
+apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ include "backend-app.fullname" . }}
