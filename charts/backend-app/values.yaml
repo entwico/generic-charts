@@ -17,6 +17,8 @@ serviceAccount:
   name:
 
 containerArgs: null
+# - executable
+# - --arg1=123
 
 podSecurityContext: {}
   # fsGroup: 2000
