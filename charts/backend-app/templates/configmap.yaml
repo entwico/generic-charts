@@ -1,11 +1,9 @@
-{{- if .Values.mountFiles -}}
-apiVersion: v1
+{{- if .Values.mountFiles2-}}
 kind: ConfigMap
 metadata:
   name: {{ include "backend-app.fullname" . }}
   labels:
     {{- include "backend-app.labels" . | nindent 4 }}
 data:
-  config.yaml: |-
-    {{- toYaml .Values.mountFiles.files | nindent 4 }}
+  {{- toYaml .Values.mountFiles.files | nindent 2 }}
 {{- end -}}
