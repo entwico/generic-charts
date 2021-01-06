@@ -3,4 +3,4 @@ apiVersion: v2
 icon: https://avatars3.githubusercontent.com/u/29914027?s=200&v=4
 description: External secrets
 type: application
-version: 1.0.0
+version: 1.0.1
