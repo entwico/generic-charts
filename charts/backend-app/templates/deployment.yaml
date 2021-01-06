@@ -6,6 +6,7 @@ metadata:
   labels:
     {{- include "backend-app.labels" . | nindent 4 }}
 spec:
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
@@ -25,7 +26,6 @@ spec:
       labels:
         {{- include "backend-app.selectorLabels" . | nindent 8 }}
     spec:
-      revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}

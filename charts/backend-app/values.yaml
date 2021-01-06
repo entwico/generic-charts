@@ -59,14 +59,14 @@ envFromSecretNames: []
 
 podAnnotations: {}
 
-mountFiles: {}
-  # path: /etc/app/
-  # files:
-  #   config.yaml: |-
-  #     server:
-  #       baseUrl: 123
-  #   application.json: |-
-  #     { "version": 23 }
+mountFiles:
+  path: /etc/app/
+  files:
+    config.yaml: |-
+      server:
+        baseUrl: 123
+    application.json: |-
+      { "version": 23 }
 
 env: []
 #  - name: APP_LOG_LEVEL
