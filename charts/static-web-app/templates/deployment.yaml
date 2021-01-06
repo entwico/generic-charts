@@ -12,10 +12,10 @@ spec:
       {{- include "static-web-app.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      {{- if .Values.ciRef }}
       annotations:
-        {{- if .Values.ciRef }}
         ciRef: {{ .Values.ciRef }}
-        {{- end }}
+      {{- end }}
       labels:
         {{- include "static-web-app.selectorLabels" . | nindent 8 }}
     spec:

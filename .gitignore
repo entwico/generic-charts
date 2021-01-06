@@ -5,3 +5,7 @@
 .vscode
 .envrc
 .env
+kube_config_cluster.yml
+Chart.lock
+charts/**/*.tgz
+*.out.yaml
