@@ -47,15 +47,9 @@ ingress:
       paths: []
   tls: []
 
-livenessProbe:
-  httpGet:
-    path: /health
-    port: http
+livenessProbe: {}
 
-readinessProbe:
-  httpGet:
-    path: /health
-    port: http
+readinessProbe: {}
 
 resources: {}
 
