@@ -14,12 +14,14 @@ spec:
     metadata:
       annotations:
         {{- if .Values.mountFiles }}
-        checksum/mountFiles: {{- toYaml .Values.mountFiles | sha256sum }}
+        checksum/mountFiles: {{ .Values.mountFiles | toJson | sha256sum }}
         {{- end }}
         {{- if .Values.ciRef }}
         ciRef: {{ .Values.ciRef }}
         {{- end }}
+        {{- if .Values.podAnnotations }}
         {{- toYaml .Values.podAnnotations | nindent 8 }}
+        {{- end }}
       labels:
         {{- include "backend-app.selectorLabels" . | nindent 8 }}
     spec:
