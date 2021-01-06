@@ -93,6 +93,16 @@ entries:
     version: 1.0.0
   external-secrets:
   - apiVersion: v2
+    created: "2021-01-06T11:24:45.739344934Z"
+    description: External secrets
+    digest: 581b62d17b68990b840bb0dd036434bfe95cc6314f4b8ad489716decfe72c370
+    icon: https://avatars3.githubusercontent.com/u/29914027?s=200&v=4
+    name: external-secrets
+    type: application
+    urls:
+    - https://github.com/entwico/helm-charts/releases/download/external-secrets-1.0.1/external-secrets-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
     created: "2020-12-29T10:38:38.148287014Z"
     description: External secrets
     digest: dccaf54cbfa67db8df5432f91ce6a021131448323d5e1afa301a02a92ef43168
