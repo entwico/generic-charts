@@ -18,6 +18,7 @@ spec:
       labels:
         {{- include "static-web-app.selectorLabels" . | nindent 8 }}
     spec:
+      revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}

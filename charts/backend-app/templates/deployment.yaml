@@ -13,6 +13,9 @@ spec:
   template:
     metadata:
       annotations:
+        {{- if .Values.mountFiles }}
+        checksum/mountFiles: {{- toYaml .Values.mountFiles | sha256sum }}
+        {{- end }}
         {{- if .Values.ciRef }}
         ciRef: {{ .Values.ciRef }}
         {{- end }}
@@ -20,10 +23,11 @@ spec:
       labels:
         {{- include "backend-app.selectorLabels" . | nindent 8 }}
     spec:
-    {{- with .Values.imagePullSecrets }}
+      revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+      {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
-    {{- end }}
+      {{- end }}
       serviceAccountName: {{ include "backend-app.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
@@ -85,5 +89,5 @@ spec:
         {{- if .Values.mountFiles }}
         - name: mounted-files
           configMap:
-            name: {{ include "backend-app.fullname" . }}
+            name: {{ include "backend-app.fullname" . }}-mounted-files
         {{ end }}

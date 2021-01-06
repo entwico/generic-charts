@@ -11,6 +11,8 @@ fullnameOverride: ""
 
 ciRef: ""
 
+revisionHistoryLimit: 10
+
 serviceAccount:
   create: true
   annotations: {}
