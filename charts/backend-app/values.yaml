@@ -49,9 +49,9 @@ ingress:
       paths: []
   tls: []
 
-livenessProbe: {}
+livenessProbe: null
 
-readinessProbe: {}
+readinessProbe: null
 
 resources: {}
 
