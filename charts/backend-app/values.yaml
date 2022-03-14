@@ -5,7 +5,8 @@ image:
   tag: latest
   pullPolicy: IfNotPresent
 
-imagePullSecrets: null
+imagePullSecrets:
+  null
   # - name: pull-secret-name
 
 nameOverride: ""
@@ -24,10 +25,12 @@ containerArgs: null
 # - executable
 # - --arg1=123
 
-podSecurityContext: {}
+podSecurityContext:
+  {}
   # fsGroup: 2000
 
-securityContext: {}
+securityContext:
+  {}
   # capabilities:
   #   drop:
   #   - ALL
@@ -62,6 +65,8 @@ tolerations: []
 affinity: {}
 
 envFromSecretNames: []
+
+deploymentAnnotations: {}
 
 podAnnotations: {}
 

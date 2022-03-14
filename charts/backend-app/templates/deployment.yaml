@@ -5,6 +5,8 @@ metadata:
   name: {{ include "backend-app.fullname" . }}
   labels:
     {{- include "backend-app.labels" . | nindent 4 }}
+  annotations:
+    {{- toYaml .Values.deploymentAnnotations | nindent 4 }}
 spec:
   revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
   replicas: {{ .Values.replicaCount }}
