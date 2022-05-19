@@ -5,8 +5,7 @@ image:
   tag: latest
   pullPolicy: IfNotPresent
 
-imagePullSecrets:
-  null
+imagePullSecrets: null
   # - name: pull-secret-name
 
 nameOverride: ""
@@ -25,12 +24,10 @@ containerArgs: null
 # - executable
 # - --arg1=123
 
-podSecurityContext:
-  {}
+podSecurityContext: {}
   # fsGroup: 2000
 
-securityContext:
-  {}
+securityContext: {}
   # capabilities:
   #   drop:
   #   - ALL
@@ -40,6 +37,7 @@ securityContext:
 
 service:
   type: ClusterIP
+  annotations: {}
   ports:
     - port: 8080
       name: http
