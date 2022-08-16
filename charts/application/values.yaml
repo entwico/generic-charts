@@ -1,6 +1,6 @@
 nameOverride: ""
 fullnameOverride: ""
-ciRef: ""
+ciRef: none
 
 serviceAccount:
   create: true
