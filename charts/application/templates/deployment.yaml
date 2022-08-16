@@ -29,7 +29,7 @@ spec:
         {{- include "application.selectorLabels" . | nindent 8 }}
     spec:
       imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
+        {{- toYaml .Values.pod.imagePullSecrets | nindent 8 }}
       serviceAccountName: {{ include "application.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.pod.securityContext | nindent 8 }}
