@@ -1,0 +1,101 @@
+{{- $fullName := include "application.fullname" . -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "application.fullname" . }}
+  labels:
+    {{- include "application.labels" . | nindent 4 }}
+  annotations:
+    {{- toYaml .Values.deployment.annotations | nindent 4 }}
+spec:
+  revisionHistoryLimit: {{ .Values.deployment.revisionHistoryLimit }}
+  replicas: {{ .Values.deployment.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "application.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        {{- range $containerIndex, $container := .Values.containers }}
+        {{- range $fileIndex, $file := $container.files }}
+        checksum/files-{{ $containerIndex }}-{{ $fileIndex }}: {{ $file.content | sha256sum }}
+        {{- end }}
+        {{- end }}
+        ciRef: {{ .Values.ciRef }}
+        {{- if .Values.pod.annotations }}
+        {{- toYaml .Values.pod.annotations | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- include "application.selectorLabels" . | nindent 8 }}
+    spec:
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      serviceAccountName: {{ include "application.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.pod.securityContext | nindent 8 }}
+      containers:
+        {{- range $containerIndex, $container := .Values.containers }}
+        - name: {{ $container.name }}
+          securityContext:
+            {{- toYaml $container.securityContext | nindent 12 }}
+          image: "{{ $container.image.repository }}:{{ $container.image.tag }}"
+          imagePullPolicy: {{ $container.image.pullPolicy }}
+          {{- if $container.args }}
+          args:
+            {{- range $container.args }}
+            - {{ . }}
+            {{- end }}
+          {{- end }}
+          env:
+            {{- toYaml $container.env | nindent 12 }}
+          {{- if $container.envFromSecretNames }}
+          envFrom:
+          {{- range $container.envFromSecretNames }}
+            - secretRef:
+                name: {{ . }}
+          {{- end }}
+          {{- end }}
+          ports:
+            {{- range $container.ports }}
+            - name: {{ .name }}
+              containerPort: {{ .port }}
+              protocol: {{ .protocol | default "TCP" }}
+            {{- end }}
+          {{- if $container.livenessProbe }}
+          livenessProbe:
+            {{- toYaml $container.livenessProbe | nindent 12 }}
+          {{- end }}
+          {{- if $container.readinessProbe }}
+          readinessProbe:
+            {{- toYaml $container.readinessProbe | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            {{- range $fileIndex, $file := $container.files }}
+            - name: {{ include "application.fullname" . }}-volume-files-{{ $containerIndex }}-{{ $fileIndex }}
+              mountPath: {{ $file.path }}
+              subPath: {{ regexFind "[^/]+$" $file.path }}
+              readOnly: true
+            {{- end }}
+          resources:
+            {{- toYaml .resources | nindent 12 }}
+        {{- end }}
+      {{- with .Values.pod.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.pod.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.pod.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      volumes:
+        {{- range $containerIndex, $container := .Values.containers }}
+        {{- range $fileIndex, $file := $container.files }}
+        - name: {{ include "application.fullname" . }}-volume-files-{{ $containerIndex }}-{{ $fileIndex }}
+          configMap:
+            name: {{ include "application.fullname" . }}-configmap-files-{{ $containerIndex }}-{{ $fileIndex }}
+        {{- end }}
+        {{- end }}

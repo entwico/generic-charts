@@ -1,5 +1,8 @@
 render-all: render-backend-app render-static-web-app render-external-secrets
 
+render-application:
+	helm template charts/application > charts/application/values.out.yaml
+
 render-backend-app:
 	helm template charts/backend-app > charts/backend-app/values.out.yaml
 

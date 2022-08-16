@@ -1,0 +1,51 @@
+nameOverride: ""
+fullnameOverride: ""
+ciRef: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name:
+
+service:
+  type: ClusterIP
+  annotations: {}
+
+deployment:
+  replicaCount: 1
+  revisionHistoryLimit: 10
+  annotations: {}
+
+pod:
+  annotations: {}
+  securityContext: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  imagePullSecrets: [] # { name: pull-secret-name }[]
+
+containers:
+  - name: main
+    image:
+      repository: ""
+      tag: latest
+      pullPolicy: IfNotPresent
+    ports: [] # { name: string; value: string }[]
+      # - name: http
+      #   protocol: TCP
+      #   port: 80
+      #   exposed: true
+      #   exposedName: null # defaults to name
+      #   exposedPort: null # defaults to port
+    livenessProbe: null
+    readinessProbe: null
+    securityContext: {}
+    resources: {}
+    args: null
+    envFromSecretNames: []
+    env: [] # { name: string; value: string }[]
+    files: [] # { path: string; content: string; }[]
+      # - path: /etc/app/config.yaml
+      #   content: |-
+      #     server:
+      #     baseUrl: 123

@@ -1,0 +1,12 @@
+{{- range $containerIndex, $container := .Values.containers }}
+{{- range $fileIndex, $file := $container.files }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "application.fullname" . }}-configmap-files-{{ $containerIndex }}-{{ $fileIndex }}
+  labels:
+    {{- include "application.labels" . | nindent 4 }}
+data:
+  {{ regexFind "[^/]+$" $file.path }}: {{ $file.content }}
+{{- end -}}
+{{- end -}}
