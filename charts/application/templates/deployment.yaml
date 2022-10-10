@@ -69,6 +69,9 @@ spec:
           readinessProbe:
             {{- toYaml $container.readinessProbe | nindent 12 }}
           {{- end }}
+          {{- if .Values.resources }}
+          resources: {{- toYaml .Values.resources | nindent 12 }}
+          {{- end }}
           volumeMounts:
             {{- range $fileIndex, $file := $container.files }}
             - name: {{ include "application.fullname" . }}-volume-files-{{ $containerIndex }}-{{ $fileIndex }}

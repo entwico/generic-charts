@@ -41,6 +41,12 @@ containers:
     readinessProbe: null
     securityContext: {}
     resources: {}
+      # limits:
+      #   cpu: 100m
+      #   memory: 128Mi
+      # requests:
+      #   cpu: 100m
+      #   memory: 128Mi
     args: null
     envFromSecretNames: []
     env: [] # { name: string; value: string }[]
@@ -49,3 +55,13 @@ containers:
       #   content: |-
       #     server:
       #     baseUrl: 123
+
+serviceMonitor:
+  enabled: false
+  portName: http
+  path: /metrics
+  labels: {}
+  interval: 1m
+  scheme: http
+  scrapeTimeout: 30s
+  relabelings: []
