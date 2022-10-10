@@ -69,8 +69,8 @@ spec:
           readinessProbe:
             {{- toYaml $container.readinessProbe | nindent 12 }}
           {{- end }}
-          {{- if .Values.resources }}
-          resources: {{- toYaml .Values.resources | nindent 12 }}
+          {{- if .resources }}
+          resources: {{- toYaml .resources | nindent 12 }}
           {{- end }}
           volumeMounts:
             {{- range $fileIndex, $file := $container.files }}
@@ -79,8 +79,6 @@ spec:
               subPath: {{ regexFind "[^/]+$" $file.path }}
               readOnly: true
             {{- end }}
-          resources:
-            {{- toYaml .resources | nindent 12 }}
         {{- end }}
       {{- with .Values.pod.nodeSelector }}
       nodeSelector:
