@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "application.fullname" . }}
+  name: {{ $fullName }}
   labels:
     {{- include "application.labels" . | nindent 4 }}
   annotations:
@@ -74,7 +74,7 @@ spec:
           {{- end }}
           volumeMounts:
             {{- range $fileIndex, $file := $container.files }}
-            - name: {{ include "application.fullname" . }}-volume-files-{{ $containerIndex }}-{{ $fileIndex }}
+            - name: {{ $fullName }}-volume-files-{{ $containerIndex }}-{{ $fileIndex }}
               mountPath: {{ $file.path }}
               subPath: {{ regexFind "[^/]+$" $file.path }}
               readOnly: true
@@ -95,8 +95,8 @@ spec:
       volumes:
         {{- range $containerIndex, $container := .Values.containers }}
         {{- range $fileIndex, $file := $container.files }}
-        - name: {{ include "application.fullname" . }}-volume-files-{{ $containerIndex }}-{{ $fileIndex }}
+        - name: {{ $fullName }}-volume-files-{{ $containerIndex }}-{{ $fileIndex }}
           configMap:
-            name: {{ include "application.fullname" . }}-configmap-files-{{ $containerIndex }}-{{ $fileIndex }}
+            name: {{ $fullName }}-configmap-files-{{ $containerIndex }}-{{ $fileIndex }}
         {{- end }}
         {{- end }}
