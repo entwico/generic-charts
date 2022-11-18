@@ -1,9 +1,10 @@
+{{- $fullName := include "application.fullname" . -}}
 {{- range $containerIndex, $container := .Values.containers }}
 {{- range $fileIndex, $file := $container.files }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "application.fullname" . }}-configmap-files-{{ $containerIndex }}-{{ $fileIndex }}
+  name: {{ $fullName }}-configmap-files-{{ $containerIndex }}-{{ $fileIndex }}
   labels:
     {{- include "application.labels" . | nindent 4 }}
 data:
