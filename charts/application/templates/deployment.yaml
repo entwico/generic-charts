@@ -1,4 +1,5 @@
 {{- $fullName := include "application.fullname" . -}}
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
