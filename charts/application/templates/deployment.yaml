@@ -39,7 +39,7 @@ spec:
         - name: {{ $container.name }}
           securityContext:
             {{- toYaml $container.securityContext | nindent 12 }}
-          image: "{{ $container.image.repository }}:{{ $container.image.tag | default latest }}"
+          image: "{{ $container.image.repository }}:{{ $container.image.tag | default "latest" }}"
           imagePullPolicy: {{ $container.image.pullPolicy }}
           {{- if $container.args }}
           args:
