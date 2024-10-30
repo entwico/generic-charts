@@ -93,6 +93,7 @@ spec:
               readOnly: {{ default false $mount.readOnly }}
             {{- end }}
         {{- end }}
+
       containers:
         # repeats implementation of initContainers
         {{- range $containerIndex, $container := .Values.containers }}

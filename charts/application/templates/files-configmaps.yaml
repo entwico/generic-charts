@@ -1,6 +1,8 @@
 # init containers
+
 {{- range $containerIndex, $container := .Values.initContainers }}
 {{- range $fileIndex, $file := $container.files }}
+
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -14,8 +16,10 @@ data:
 {{- end -}}
 
 # containers
+
 {{- range $containerIndex, $container := .Values.containers }}
 {{- range $fileIndex, $file := $container.files }}
+
 ---
 apiVersion: v1
 kind: ConfigMap
