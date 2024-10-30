@@ -1,0 +1,20 @@
+{{- $fullName := include "application.fullname" . -}}
+
+{{- range $volumeIndex, $volume := .Values.pod.volumes }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ $fullName }}-volume-{{ $volume.name }}
+  labels:
+    {{- include "application.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    - {{ .Values.persistentVolume.accessMode }}
+  resources:
+    requests:
+      storage: {{ .Values.persistentVolume.size }}
+  {{- if .Values.persistentVolume.storageClassName }}
+  storageClassName: {{ .Values.persistentVolume.storageClassName }}
+  {{- end }}
+{{- end }}

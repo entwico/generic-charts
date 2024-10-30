@@ -163,6 +163,6 @@ spec:
         {{- range $volumeIndex, $volume := .Values.pod.volumes }}
         - name: {{ $volume.name }}
           persistentVolumeClaim:
-            claimName: {{ $fullName }}-volume-{{ $volumeIndex }}
+            claimName: {{ $fullName }}-volume-{{ $volume.name }}
         {{- end }}
 
