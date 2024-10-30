@@ -49,6 +49,7 @@ initContainers:
       # requests:
       #   cpu: 100m
       #   memory: 128Mi
+    command: null
     args: null
     envFromSecretNames: []
     env: [] # { name: string; value: string }[]
@@ -83,6 +84,7 @@ containers:
       # requests:
       #   cpu: 100m
       #   memory: 128Mi
+    command: null
     args: null
     envFromSecretNames: []
     env: [] # { name: string; value: string }[]

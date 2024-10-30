@@ -42,6 +42,12 @@ spec:
             {{- toYaml $container.securityContext | nindent 12 }}
           image: "{{ $container.image.repository }}:{{ $container.image.tag | default "latest" }}"
           imagePullPolicy: {{ $container.image.pullPolicy }}
+          {{- if $container.command }}
+          command:
+            {{- range $container.command }}
+            - {{ . }}
+            {{- end }}
+          {{- end }}
           {{- if $container.args }}
           args:
             {{- range $container.args }}
@@ -95,6 +101,12 @@ spec:
             {{- toYaml $container.securityContext | nindent 12 }}
           image: "{{ $container.image.repository }}:{{ $container.image.tag | default "latest" }}"
           imagePullPolicy: {{ $container.image.pullPolicy }}
+          {{- if $container.command }}
+          command:
+            {{- range $container.command }}
+            - {{ . }}
+            {{- end }}
+          {{- end }}
           {{- if $container.args }}
           args:
             {{- range $container.args }}
