@@ -76,7 +76,7 @@ spec:
           {{- end }}
           volumeMounts:
             {{- range $fileIndex, $file := $container.files }}
-            - name: {{ $fullName }}-volume-files-{{ $containerIndex }}-{{ $fileIndex }}
+            - name: {{ $fullName }}-volume-files-init-containers-{{ $containerIndex }}-{{ $fileIndex }}
               mountPath: {{ $file.path }}
               subPath: {{ regexFind "[^/]+$" $file.path }}
               readOnly: true
@@ -129,7 +129,7 @@ spec:
           {{- end }}
           volumeMounts:
             {{- range $fileIndex, $file := $container.files }}
-            - name: {{ $fullName }}-volume-files-{{ $containerIndex }}-{{ $fileIndex }}
+            - name: {{ $fullName }}-volume-files-containers-{{ $containerIndex }}-{{ $fileIndex }}
               mountPath: {{ $file.path }}
               subPath: {{ regexFind "[^/]+$" $file.path }}
               readOnly: true
@@ -153,11 +153,18 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       volumes:
+        {{- range $containerIndex, $container := .Values.initContainers }}
+        {{- range $fileIndex, $file := $container.files }}
+        - name: {{ $fullName }}-volume-files-init-containers-{{ $containerIndex }}-{{ $fileIndex }}
+          configMap:
+            name: {{ $fullName }}-configmap-files-init-containers-{{ $containerIndex }}-{{ $fileIndex }}
+        {{- end }}
+        {{- end }}
         {{- range $containerIndex, $container := .Values.containers }}
         {{- range $fileIndex, $file := $container.files }}
-        - name: {{ $fullName }}-volume-files-{{ $containerIndex }}-{{ $fileIndex }}
+        - name: {{ $fullName }}-volume-files-containers-{{ $containerIndex }}-{{ $fileIndex }}
           configMap:
-            name: {{ $fullName }}-configmap-files-{{ $containerIndex }}-{{ $fileIndex }}
+            name: {{ $fullName }}-configmap-files-containers-{{ $containerIndex }}-{{ $fileIndex }}
         {{- end }}
         {{- end }}
         {{- range $volumeIndex, $volume := .Values.pod.volumes }}

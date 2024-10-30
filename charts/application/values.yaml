@@ -23,7 +23,7 @@ pod:
   tolerations: []
   affinity: {}
   imagePullSecrets: [] # { name: pull-secret-name }[]
-  volumes: [] # { accessModes: ["ReadWriteOnce"]; name: ""; storageClass: ""; size: 1Gi }[]
+  volumes: [] # { accessModes: ["ReadWriteOnce"]; name: ""; storageClassName: ""; size: 1Gi }[]
 
 # repeats config of containers
 initContainers:

@@ -15,7 +15,7 @@ spec:
   resources:
     requests:
       storage: {{ $volume.size }}
-  {{- if $volume.storageClass }}
-  storageClassName: {{ $volume.storageClass }}
+  {{- if $volume.storageClassName }}
+  storageClassName: {{ $volume.storageClassName }}
   {{- end }}
 {{- end }}
