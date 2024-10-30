@@ -34,7 +34,61 @@ spec:
       serviceAccountName: {{ include "application.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.pod.securityContext | nindent 8 }}
+      initContainers:
+        # repeats implementation of containers
+        {{- range $containerIndex, $container := .Values.initContainers }}
+        - name: {{ $container.name }}
+          securityContext:
+            {{- toYaml $container.securityContext | nindent 12 }}
+          image: "{{ $container.image.repository }}:{{ $container.image.tag | default "latest" }}"
+          imagePullPolicy: {{ $container.image.pullPolicy }}
+          {{- if $container.args }}
+          args:
+            {{- range $container.args }}
+            - {{ . }}
+            {{- end }}
+          {{- end }}
+          env:
+            {{- toYaml $container.env | nindent 12 }}
+          {{- if $container.envFromSecretNames }}
+          envFrom:
+          {{- range $container.envFromSecretNames }}
+            - secretRef:
+                name: {{ . }}
+          {{- end }}
+          {{- end }}
+          ports:
+            {{- range $container.ports }}
+            - name: {{ .name }}
+              containerPort: {{ .port }}
+              protocol: {{ .protocol | default "TCP" }}
+            {{- end }}
+          {{- if $container.livenessProbe }}
+          livenessProbe:
+            {{- toYaml $container.livenessProbe | nindent 12 }}
+          {{- end }}
+          {{- if $container.readinessProbe }}
+          readinessProbe:
+            {{- toYaml $container.readinessProbe | nindent 12 }}
+          {{- end }}
+          {{- if .resources }}
+          resources: {{- toYaml .resources | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            {{- range $fileIndex, $file := $container.files }}
+            - name: {{ $fullName }}-volume-files-{{ $containerIndex }}-{{ $fileIndex }}
+              mountPath: {{ $file.path }}
+              subPath: {{ regexFind "[^/]+$" $file.path }}
+              readOnly: true
+            {{- end }}
+            {{- range $mountIndex, $mount := $container.volumeMounts }}
+            - name: {{ $mount.name }}
+              mountPath: {{ $mount.path }}
+              readOnly: {{ default false $mount.readOnly }}
+            {{- end }}
+        {{- end }}
       containers:
+        # repeats implementation of initContainers
         {{- range $containerIndex, $container := .Values.containers }}
         - name: {{ $container.name }}
           securityContext:
@@ -80,6 +134,11 @@ spec:
               subPath: {{ regexFind "[^/]+$" $file.path }}
               readOnly: true
             {{- end }}
+            {{- range $mountIndex, $mount := $container.volumeMounts }}
+            - name: {{ $mount.name }}
+              mountPath: {{ $mount.path }}
+              readOnly: {{ default false $mount.readOnly }}
+            {{- end }}
         {{- end }}
       {{- with .Values.pod.nodeSelector }}
       nodeSelector:
@@ -101,3 +160,9 @@ spec:
             name: {{ $fullName }}-configmap-files-{{ $containerIndex }}-{{ $fileIndex }}
         {{- end }}
         {{- end }}
+        {{- range $volumeIndex, $volume := .Values.pod.volumes }}
+        - name: {{ $volume.name }}
+          persistentVolumeClaim:
+            claimName: {{ $fullName }}-volume-{{ $volumeIndex }}
+        {{- end }}
+
