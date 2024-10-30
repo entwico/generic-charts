@@ -10,11 +10,11 @@ metadata:
     {{- include "application.labels" . | nindent 4 }}
 spec:
   accessModes:
-    - {{ .Values.persistentVolume.accessMode }}
+    - {{ $volume.accessMode }}
   resources:
     requests:
-      storage: {{ .Values.persistentVolume.size }}
-  {{- if .Values.persistentVolume.storageClassName }}
-  storageClassName: {{ .Values.persistentVolume.storageClassName }}
+      storage: {{ $volume.size }}
+  {{- if $volume.storageClass }}
+  storageClassName: {{ $volume.storageClass }}
   {{- end }}
 {{- end }}
