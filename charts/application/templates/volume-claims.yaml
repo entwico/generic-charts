@@ -11,7 +11,7 @@ metadata:
     {{- $labels | nindent 4 }}
 spec:
   accessModes:
-    - {{ $volume.accessMode }}
+    {{- $volume.accessModes | nindent 4 }}
   resources:
     requests:
       storage: {{ $volume.size }}
