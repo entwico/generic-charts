@@ -83,7 +83,7 @@ spec:
             {{- end }}
             {{- range $mountIndex, $mount := $container.volumeMounts }}
             - name: {{ $mount.name }}
-              mountPath: {{ $mount.path }}
+              mountPath: {{ $mount.mountPath }}
               readOnly: {{ default false $mount.readOnly }}
             {{- end }}
         {{- end }}
