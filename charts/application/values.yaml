@@ -26,39 +26,39 @@ pod:
   volumes: [] # { accessModes: ["ReadWriteOnce"]; name: ""; storageClassName: ""; size: 1Gi }[]
 
 # repeats config of containers
-initContainers:
-  - name: init
-    image:
-      repository: ""
-      tag: latest
-      pullPolicy: IfNotPresent
-    ports: [] # { name: string; value: string }[]
-      # - name: http
-      #   protocol: TCP
-      #   port: 80
-      #   exposed: true
-      #   exposedName: null # defaults to name
-      #   exposedPort: null # defaults to port
-    livenessProbe: null
-    readinessProbe: null
-    securityContext: {}
-    resources: {}
-      # limits:
-      #   cpu: 100m
-      #   memory: 128Mi
-      # requests:
-      #   cpu: 100m
-      #   memory: 128Mi
-    command: null
-    args: null
-    envFromSecretNames: []
-    env: [] # { name: string; value: string }[]
-    volumeMounts: [] # { name: string; readOnly: boolean; mountPath: string }[]
-    files: [] # { path: string; content: string; }[]
-      # - path: /etc/app/config.yaml
-      #   content: |-
-      #     server:
-      #     baseUrl: 123
+initContainers: []
+  # - name: init
+  #   image:
+  #     repository: ""
+  #     tag: latest
+  #     pullPolicy: IfNotPresent
+  #   ports: [] # { name: string; value: string }[]
+  #     # - name: http
+  #     #   protocol: TCP
+  #     #   port: 80
+  #     #   exposed: true
+  #     #   exposedName: null # defaults to name
+  #     #   exposedPort: null # defaults to port
+  #   livenessProbe: null
+  #   readinessProbe: null
+  #   securityContext: {}
+  #   resources: {}
+  #     # limits:
+  #     #   cpu: 100m
+  #     #   memory: 128Mi
+  #     # requests:
+  #     #   cpu: 100m
+  #     #   memory: 128Mi
+  #   command: null
+  #   args: null
+  #   envFromSecretNames: []
+  #   env: [] # { name: string; value: string }[]
+  #   volumeMounts: [] # { name: string; readOnly: boolean; mountPath: string }[]
+  #   files: [] # { path: string; content: string; }[]
+  #     # - path: /etc/app/config.yaml
+  #     #   content: |-
+  #     #     server:
+  #     #     baseUrl: 123
 
 # repeats config of initContainers
 containers:
