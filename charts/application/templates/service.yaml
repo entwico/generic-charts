@@ -17,6 +17,9 @@ spec:
       targetPort: {{ .exposedPort | default .port }}
       protocol: {{ .protocol | default "TCP" }}
       name: {{ .exposedName | default .name }}
+      {{- if .appProtocol }}
+      appProtocol: {{ .appProtocol }}
+      {{- end }}
     {{- end }}
     {{- end }}
     {{- end }}
