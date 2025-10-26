@@ -182,7 +182,25 @@ spec:
         {{- end }}
         {{- range $volumeIndex, $volume := .Values.pod.volumes }}
         - name: {{ $volume.name }}
+          {{- if or (not $volume.type) (eq $volume.type "pvc") }}
           persistentVolumeClaim:
             claimName: {{ $fullName }}-volume-{{ $volume.name }}
+          {{- else if eq $volume.type "configMap" }}
+          configMap:
+            name: {{ $volume.configMapName }}
+            {{- if $volume.items }}
+            items:
+              {{- toYaml $volume.items | nindent 14 }}
+            {{- end }}
+          {{- else if eq $volume.type "secret" }}
+          secret:
+            secretName: {{ $volume.secretName }}
+            {{- if $volume.items }}
+            items:
+              {{- toYaml $volume.items | nindent 14 }}
+            {{- end }}
+          {{- else if eq $volume.type "emptyDir" }}
+          emptyDir: {}
+          {{- end }}
         {{- end }}
 

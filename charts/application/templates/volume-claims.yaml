@@ -2,6 +2,7 @@
 {{- $labels := include "application.labels" . -}}
 
 {{- range $volumeIndex, $volume := .Values.pod.volumes }}
+{{- if or (not $volume.type) (eq $volume.type "pvc") }}
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -18,4 +19,5 @@ spec:
   {{- if $volume.storageClassName }}
   storageClassName: {{ $volume.storageClassName }}
   {{- end }}
+{{- end }}
 {{- end }}

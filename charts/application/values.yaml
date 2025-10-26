@@ -23,7 +23,26 @@ pod:
   tolerations: []
   affinity: {}
   imagePullSecrets: [] # { name: pull-secret-name }[]
-  volumes: [] # { accessModes: ["ReadWriteOnce"]; name: ""; storageClassName: ""; size: 1Gi }[]
+  volumes: [] # Supports multiple volume types (type defaults to 'pvc' for backward compatibility)
+    # PVC example:
+    # - name: data
+    #   type: pvc  # optional, defaults to pvc if not specified
+    #   accessModes: ["ReadWriteOnce"]
+    #   storageClassName: ""
+    #   size: 1Gi
+    # ConfigMap example:
+    # - name: config
+    #   type: configMap
+    #   configMapName: my-configmap
+    #   items: []  # optional: [{ key: "config.yaml", path: "config.yaml" }]
+    # Secret example:
+    # - name: secrets
+    #   type: secret
+    #   secretName: my-secret
+    #   items: []  # optional: [{ key: "token", path: "token" }]
+    # EmptyDir example:
+    # - name: cache
+    #   type: emptyDir
 
 # repeats config of containers
 initContainers: []
