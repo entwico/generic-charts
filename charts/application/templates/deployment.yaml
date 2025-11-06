@@ -90,6 +90,9 @@ spec:
             {{- range $mountIndex, $mount := $container.volumeMounts }}
             - name: {{ $mount.name }}
               mountPath: {{ $mount.mountPath }}
+              {{- if $mount.subPath }}
+              subPath: {{ $mount.subPath }}
+              {{- end }}
               readOnly: {{ default false $mount.readOnly }}
             {{- end }}
         {{- end }}
@@ -150,6 +153,9 @@ spec:
             {{- range $mountIndex, $mount := $container.volumeMounts }}
             - name: {{ $mount.name }}
               mountPath: {{ $mount.mountPath }}
+              {{- if $mount.subPath }}
+              subPath: {{ $mount.subPath }}
+              {{- end }}
               readOnly: {{ default false $mount.readOnly }}
             {{- end }}
         {{- end }}
