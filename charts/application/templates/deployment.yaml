@@ -199,6 +199,10 @@ spec:
             items:
               {{- toYaml $volume.items | nindent 14 }}
             {{- end }}
+          {{- else if eq $volume.type "image" }}
+          image:
+            reference: {{ $volume.reference }}
+            pullPolicy: {{ default "IfNotPresent" $volume.pullPolicy }}
           {{- else if eq $volume.type "emptyDir" }}
           emptyDir: {}
           {{- end }}
