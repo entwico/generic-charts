@@ -15,6 +15,13 @@ deployment:
   replicaCount: 1
   revisionHistoryLimit: 0
   annotations: {}
+  strategy: {}
+    # type: RollingUpdate
+    # rollingUpdate:
+    #   maxSurge: 25%
+    #   maxUnavailable: 25%
+    # -- or --
+    # type: Recreate
 
 pod:
   annotations: {}
