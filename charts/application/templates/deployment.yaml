@@ -44,7 +44,11 @@ spec:
         - name: {{ $container.name }}
           securityContext:
             {{- toYaml $container.securityContext | nindent 12 }}
+          {{- if $container.image.digest }}
+          image: "{{ $container.image.repository }}@{{ $container.image.digest }}"
+          {{- else }}
           image: "{{ $container.image.repository }}:{{ $container.image.tag | default "latest" }}"
+          {{- end }}
           imagePullPolicy: {{ $container.image.pullPolicy }}
           {{- if $container.command }}
           command:
@@ -107,7 +111,11 @@ spec:
         - name: {{ $container.name }}
           securityContext:
             {{- toYaml $container.securityContext | nindent 12 }}
+          {{- if $container.image.digest }}
+          image: "{{ $container.image.repository }}@{{ $container.image.digest }}"
+          {{- else }}
           image: "{{ $container.image.repository }}:{{ $container.image.tag | default "latest" }}"
+          {{- end }}
           imagePullPolicy: {{ $container.image.pullPolicy }}
           {{- if $container.command }}
           command:

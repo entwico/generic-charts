@@ -57,6 +57,7 @@ initContainers: []
   #   image:
   #     repository: ""
   #     tag: latest
+  #     digest: ""  # Optional: e.g. sha256:abc123... (overrides tag when set)
   #     pullPolicy: IfNotPresent
   #   ports: [] # { name: string; value: string }[]
   #     # - name: http
@@ -92,6 +93,7 @@ containers:
     image:
       repository: ""
       tag: latest
+      digest: ""  # Optional: e.g. sha256:abc123... (overrides tag when set)
       pullPolicy: IfNotPresent
     ports: [] # { name: string; value: string }[]
       # - name: http
