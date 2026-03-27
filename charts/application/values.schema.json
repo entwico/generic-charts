@@ -215,6 +215,7 @@
             "allOf": [
               {
                 "if": {
+                  "required": ["type"],
                   "properties": {
                     "type": {
                       "const": "pvc"
@@ -227,6 +228,7 @@
               },
               {
                 "if": {
+                  "required": ["type"],
                   "properties": {
                     "type": {
                       "const": "configMap"
@@ -239,6 +241,7 @@
               },
               {
                 "if": {
+                  "required": ["type"],
                   "properties": {
                     "type": {
                       "const": "secret"
@@ -251,6 +254,7 @@
               },
               {
                 "if": {
+                  "required": ["type"],
                   "properties": {
                     "type": {
                       "const": "image"
