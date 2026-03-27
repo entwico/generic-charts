@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   application:
   - apiVersion: v2
+    created: "2026-03-27T16:56:49.658857753Z"
+    description: Generic application deployment
+    digest: f032d4276cb8c33ecf2c7a01d00685738952424a49a740af652ef11e109a4c04
+    icon: https://avatars3.githubusercontent.com/u/29914027?s=200&v=4
+    name: application
+    type: application
+    urls:
+    - https://github.com/entwico/generic-charts/releases/download/application-1.7.1/application-1.7.1.tgz
+    version: 1.7.1
+  - apiVersion: v2
     created: "2026-02-24T18:16:46.135567896Z"
     description: Generic application deployment
     digest: ed68236cd52add42af43d4e231c0488627d7e7647351ca4d8a7cc662f3a2d103
